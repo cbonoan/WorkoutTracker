@@ -1,7 +1,8 @@
 import { Exercise as ExerciseModel } from "@/models/Exercise";
 import { TExercise } from "@/types/TExercise";
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import Button from "./Button";
 import Seperator from "./Seperator";
 import Set from "./Set";
@@ -10,12 +11,14 @@ import TextInput from "./TextInput";
 
 type TExerciseProps = TExercise & {
     exercise: ExerciseModel
+    handleRemoveExercise: (exerciseId: string) => void;
 }
 
 const Exercise = ({
     exercise,
     name,
     sets,
+    handleRemoveExercise,
 }: TExerciseProps) => {
     const [currentSets, setCurrentSets] = useState(sets);
 
@@ -43,7 +46,12 @@ const Exercise = ({
 
     return (
         <View style={exerciseStyles.view}>
-            <TextInput type="subtitle">{name}</TextInput>
+            <View style={exerciseStyles.exerciseHeader}>
+                <TextInput type="subtitle">{name}</TextInput>
+                <Pressable onPress={() => handleRemoveExercise(exercise.getId())}>
+                    <Ionicons name="remove-circle" size={24} color="#BD2A2E" />
+                </Pressable>
+            </View>
             {sets.length > 0 && (
                 <View style={exerciseStyles.setsHeader}>
                     <Text style={exerciseStyles.column} type="defaultSemiBold">Set</Text>
@@ -87,6 +95,12 @@ const exerciseStyles = StyleSheet.create({
     view: {
         padding: 10,
         marginVertical: 10,
+    },
+    exerciseHeader: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     column: {
         width: '25%',

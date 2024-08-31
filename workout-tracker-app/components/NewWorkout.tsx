@@ -22,8 +22,24 @@ const NewWorkout = ({
     const handleAddExercise = () => {
         setExercises(prev => [
             ...prev, 
-            new ExerciseModel(`Exercise ${prev.length + 1}`)
+            new ExerciseModel()
         ]);
+    }
+
+    const handleRemoveExercise = (exerciseId: string) => {
+        const currentExercies = exercises;
+
+        let index = 0;
+        for (let i = 0; i < currentExercies.length; i++) {
+            const exercise = currentExercies[i];
+            if (exercise.getId() === exerciseId) {
+                index = i;
+                break;
+            }
+        }
+
+        currentExercies.splice(index, 1);
+        setExercises([ ...currentExercies ]);
     }
 
     const handleCancelWorkout = () => {
@@ -55,6 +71,7 @@ const NewWorkout = ({
                             exercise={exercise}
                             name={exercise.getName()}
                             sets={exercise.getSets()}
+                            handleRemoveExercise={handleRemoveExercise}
                         />
                    )}
                 />
