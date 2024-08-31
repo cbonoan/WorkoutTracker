@@ -48,8 +48,10 @@ const NewWorkout = ({
                 {exercises.length == 0 && <Text type="subtitle">Let's get to work!</Text>}
                 <FlatList 
                     data={exercises}
+                    keyExtractor={(item) => `${item.getId()}`}
                     renderItem={({item: exercise}) => (
                         <Exercise
+                            key={exercise.getId()}
                             exercise={exercise}
                             name={exercise.getName()}
                             sets={exercise.getSets()}

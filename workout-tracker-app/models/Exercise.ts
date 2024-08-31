@@ -1,16 +1,19 @@
 import { TSet } from "@/types/TSet";
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
 export class Exercise {
+    private id: string;
     private name: string;
     private sets: TSet[];
-    private currentSetNumber: number;
 
     public constructor(name: string) {
+        this.id = uuidv4();
         this.name = name;
-        this.currentSetNumber = 1;
         this.sets = [
             {
-                setNumber: this.currentSetNumber,
+                id: uuidv4(),
+                setNumber: 1,
                 weight: undefined,
                 reps: undefined,
             }
@@ -18,12 +21,24 @@ export class Exercise {
     }
 
     public addSet() {
-        this.currentSetNumber++;
         this.sets.push({
-            setNumber: this.currentSetNumber,
+            id: uuidv4(),
+            setNumber: this.sets.length + 1,
             weight: undefined,
             reps: undefined,
         });
+    }
+
+    public removeSet(setNumber: number) {
+        this.sets.splice(setNumber, 1);
+    }
+
+    public setWeight(setNumber: number, weight: number) {
+        this.sets[setNumber].weight = weight;
+    }
+
+    public setReps(setNumber: number, reps: number) {
+        this.sets[setNumber].reps = reps;
     }
 
     public getName() {
