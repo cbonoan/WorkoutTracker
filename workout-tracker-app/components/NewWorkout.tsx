@@ -1,7 +1,8 @@
 import { useModal } from "@/hooks/useModal";
 import { useNewWorkout } from "@/hooks/useNewWorkout";
 import { TExerciseDataset } from "@/types/TExercise";
-import { FlatList, Modal, StyleSheet, View } from "react-native";
+import { Modal, StyleSheet, View } from "react-native";
+import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import AddExercise from "./AddExercise";
 import Button from "./Button";
 import Exercise from "./Exercise";
@@ -49,32 +50,33 @@ const NewWorkout = ({
                     >
                         {workoutName}
                     </TextInput>
-                    <Button title="Finish"/>
+                    <Button 
+                        title="Finish"
+                        disabled={exercises.length == 0} 
+                    />
                 </View>
                 {exercises.length == 0 && <Text type="subtitle">Let's get to work!</Text>}
-                <FlatList 
+                <KeyboardAwareFlatList 
                     data={exercises}
-                    keyExtractor={(item) => `${item.getId()}`}
-                    renderItem={({item: exercise}) => (
+                    keyExtractor={(item, index) => `${item.getId() + index}`}
+                    renderItem={({item: exercise, index}) => (
                         <Exercise
-                            key={exercise.getId()}
+                            key={exercise.getId() + index}
                             id={exercise.getId()}
                             exercise={exercise}
                             name={exercise.getName()}
                             sets={exercise.getSets()}
                             handleRemoveExercise={handleRemoveExercise}
                         />
-                   )}
+                )}
                 />
 
-                <View style={styles.buttonGroup}>
-                    <Button title="Add exercise" onPress={handleOpenAddExerciseModal}/>
-                    <Seperator />
-                    <Button color={'#BD2A2E'} title="Cancel workout" onPress={() => {
-                        handleCancelWorkout();
-                        handleCloseModal();
-                    }}/>
-                </View>
+                <Button title="Add exercise" onPress={handleOpenAddExerciseModal}/>
+                <Seperator />
+                <Button color={'#BD2A2E'} title="Cancel workout" onPress={() => {
+                    handleCancelWorkout();
+                    handleCloseModal();
+                }}/>
             </View>
 
             <AddExercise 
@@ -99,9 +101,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    buttonGroup: {
-        marginVertical: 20,
-    }
   })
 
 export default NewWorkout;

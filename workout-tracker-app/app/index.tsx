@@ -5,29 +5,89 @@ import { Text } from "@/components/Text";
 import WorkoutHistory from "@/components/WorkoutHistory";
 import { TExerciseDataset } from "@/types/TExercise";
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 
 const exerciseDb: TExerciseDataset[] = [
-  {
-    name: 'Barbell Back Squat',
-    id: '2',
-  },
-  {
-    name: 'Barbell Bench',
-    id: '1',
-  },
-  {
-    name: 'Dumbbell Curls',
-    id: '4',
-  },
-  {
-    name: 'Dumbbell Overhead Shoulder Press',
-    id: '5',
-  },
-  {
-    name: 'Lat Pulldown',
-    id: '3',
-  },
+    {
+        "name": "Barbell Bench Press",
+        "id": "1"
+    },
+    {
+        "name": "Barbell Bent-Over Row",
+        "id": "2"
+    },
+    {
+        "name": "Barbell Curl",
+        "id": "3"
+    },
+    {
+        "name": "Barbell Deadlift",
+        "id": "4"
+    },
+    {
+        "name": "Barbell Overhead Press",
+        "id": "5"
+    },
+    {
+        "name": "Barbell Squat",
+        "id": "6"
+    },
+    {
+        "name": "Cable Tricep Pushdown",
+        "id": "7"
+    },
+    {
+        "name": "Chest Dip",
+        "id": "8"
+    },
+    {
+        "name": "Chin-Up",
+        "id": "9"
+    },
+    {
+        "name": "Dumbbell Bench Press",
+        "id": "10"
+    },
+    {
+        "name": "Dumbbell Curl",
+        "id": "11"
+    },
+    {
+        "name": "Dumbbell Fly",
+        "id": "12"
+    },
+    {
+        "name": "Dumbbell Lateral Raise",
+        "id": "13"
+    },
+    {
+        "name": "Dumbbell Shoulder Press",
+        "id": "14"
+    },
+    {
+        "name": "Incline Barbell Bench Press",
+        "id": "15"
+    },
+    {
+        "name": "Leg Press",
+        "id": "16"
+    },
+    {
+        "name": "Pull-Up",
+        "id": "17"
+    },
+    {
+        "name": "Seated Cable Row",
+        "id": "18"
+    },
+    {
+        "name": "Standing Calf Raise",
+        "id": "19"
+    },
+    {
+        "name": "Tricep Dip",
+        "id": "20"
+    }
 ]
 
 export default function Index() {
@@ -45,7 +105,7 @@ export default function Index() {
   }, []);
 
   return (
-    <View style={styles.view}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} enabled={false} style={styles.view}>
       <Text type="title">Workout Tracker</Text>
       <Seperator />
       <Button 
@@ -59,7 +119,7 @@ export default function Index() {
       />
 
       <WorkoutHistory />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -3,7 +3,8 @@ import { TExercise } from "@/types/TExercise";
 import { TSet } from "@/types/TSet";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import Button from "./Button";
 import Seperator from "./Seperator";
 import Set from "./Set";
@@ -55,7 +56,8 @@ const Exercise = ({
                         maxWidth: '60%',
                         backgroundColor: '#878787',
                         borderRadius: 5,
-                        padding: 5,
+                        paddingVertical: 5,
+                        paddingHorizontal: 15,
                     }} 
                     type="subtitle"
                 >
@@ -73,7 +75,7 @@ const Exercise = ({
                     <Text style={exerciseStyles.column} type="defaultSemiBold">Remove</Text>
                 </View>
             )}
-            <FlatList 
+            <KeyboardAwareFlatList 
                 data={currentSets}
                 keyExtractor={(item) => `${item.id}`}
                 renderItem={({item: set, index}) => (

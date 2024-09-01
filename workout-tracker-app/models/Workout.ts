@@ -6,10 +6,12 @@ export class Workout {
     private id: string;
     private name: string;
     private exercises: TExercise[];
+    private completedAt: Date;
 
     constructor(name: string, exercises: TExercise[]) {
         this.id = v4();
         this.name = name;
         this.exercises = exercises;
+        this.completedAt = new Date();
     }
 }

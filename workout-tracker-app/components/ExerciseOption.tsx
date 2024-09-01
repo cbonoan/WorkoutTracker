@@ -32,9 +32,8 @@ const ExerciseOption = ({
 
 const exerciseOptionStyles = StyleSheet.create({
     view: {
-        marginVertical: 20,
         borderTopWidth: StyleSheet.hairlineWidth,
-        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderTopColor: '#B2BEBF',
     },
     touchableHighlight: {
         padding: 15,
