@@ -1,8 +1,7 @@
 import { TSet } from "@/types/TSet";
 import 'react-native-get-random-values';
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 
-const { v4 } = uuid;
 
 export class Exercise {
     private id: string;
@@ -10,9 +9,9 @@ export class Exercise {
     private sets: TSet[];
 
     constructor();
-    constructor(name: string);
-    constructor(name?: string) {
-        this.id = v4();
+    constructor(name: string, id: string);
+    constructor(name?: string, id?: string) {
+        this.id = id ?? v4();
         this.name = name ?? 'New Exercise';
         this.sets = [
             {

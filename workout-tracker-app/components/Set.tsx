@@ -1,14 +1,14 @@
-import { TSet } from "@/types/TSet";
+import { TSet } from '@/types/TSet';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Pressable, StyleSheet, View } from "react-native";
 import { Text } from "./Text";
 import TextInput from "./TextInput";
 
-type TSetProps = Omit<TSet, 'id'> & {
-    handleRemoveSet: (setNumber: number) => void,
-    handleEditWeight: (setNumber: number, weight: number) => void,
-    handleEditReps: (setNumber: number, reps: number) => void,
-    isRemoveDisabled: boolean,
+interface ISet extends Omit<TSet, 'id'> {
+    handleRemoveSet: (setNumber: number) => void;
+    handleEditWeight: (setNumber: number, weight: number) => void;
+    handleEditReps: (setNumber: number, reps: number) => void;
+    isRemoveDisabled: boolean;
 }
 
 const Set = ({
@@ -19,7 +19,7 @@ const Set = ({
     handleEditWeight,
     handleEditReps,
     isRemoveDisabled,
-}: TSetProps) => {
+}: ISet) => {
     return (
         <View style={setStyles.set}>
             <Text style={{ width: '25%', textAlign: 'center'}}>{setNumber}</Text>

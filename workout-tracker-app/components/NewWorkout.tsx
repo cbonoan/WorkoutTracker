@@ -1,6 +1,7 @@
-import { Exercise as ExerciseModel } from "@/models/Exercise";
-import { useState } from "react";
+import { useNewWorkout } from "@/hooks/useNewWorkout";
+import { TExerciseDataset } from "@/types/TExercise";
 import { FlatList, Modal, StyleSheet, View } from "react-native";
+import AddExercise from "./AddExercise";
 import Button from "./Button";
 import Exercise from "./Exercise";
 import Seperator from "./Seperator";
@@ -10,43 +11,24 @@ import TextInput from "./TextInput";
 interface INewWorkout {
     isModalVisible: boolean;
     handleCloseModal: () => void;
+    exerciseDataset: TExerciseDataset[];
 }
 
 const NewWorkout = ({
     isModalVisible,
     handleCloseModal,
+    exerciseDataset,
 }: INewWorkout) => {
-    const [exercises, setExercises] = useState<ExerciseModel[]>([]);
-    const [workoutName, setWorkoutName] = useState('New Workout');
-
-    const handleAddExercise = () => {
-        setExercises(prev => [
-            ...prev, 
-            new ExerciseModel()
-        ]);
-    }
-
-    const handleRemoveExercise = (exerciseId: string) => {
-        const currentExercies = exercises;
-
-        let index = 0;
-        for (let i = 0; i < currentExercies.length; i++) {
-            const exercise = currentExercies[i];
-            if (exercise.getId() === exerciseId) {
-                index = i;
-                break;
-            }
-        }
-
-        currentExercies.splice(index, 1);
-        setExercises([ ...currentExercies ]);
-    }
-
-    const handleCancelWorkout = () => {
-        setWorkoutName('New Workout');
-        setExercises([]);
-        handleCloseModal()
-    }
+    const {
+        exercises,
+        isAddExerciseModalOpen,
+        workoutName,
+        handleChangeWorkoutName,
+        handleOpenAddExerciseModal,
+        handleAddExercise,
+        handleRemoveExercise,
+        handleCancelWorkout,
+    } = useNewWorkout(handleCloseModal);
 
     return (
         <Modal
@@ -55,12 +37,15 @@ const NewWorkout = ({
             transparent={true}
         >
             <View style={styles.modalView}>
-                <TextInput 
-                    type="title" 
-                    onChangeText={(name) => setWorkoutName(name)}
-                >
-                    {workoutName}
-                </TextInput>
+                <View style={styles.workoutHeader}>
+                    <TextInput 
+                        type="title" 
+                        onChangeText={(name) => handleChangeWorkoutName(name)}
+                    >
+                        {workoutName}
+                    </TextInput>
+                    <Button title="Finish"/>
+                </View>
                 {exercises.length == 0 && <Text type="subtitle">Let's get to work!</Text>}
                 <FlatList 
                     data={exercises}
@@ -68,6 +53,7 @@ const NewWorkout = ({
                     renderItem={({item: exercise}) => (
                         <Exercise
                             key={exercise.getId()}
+                            id={exercise.getId()}
                             exercise={exercise}
                             name={exercise.getName()}
                             sets={exercise.getSets()}
@@ -77,11 +63,16 @@ const NewWorkout = ({
                 />
 
                 <View style={styles.buttonGroup}>
-                    <Button title="Add exercise" onPress={handleAddExercise}/>
+                    <Button title="Add exercise" onPress={handleOpenAddExerciseModal}/>
                     <Seperator />
                     <Button color={'#BD2A2E'} title="Cancel workout" onPress={handleCancelWorkout}/>
                 </View>
             </View>
+
+            <AddExercise 
+                exerciseDataset={exerciseDataset}
+                isOpen={isAddExerciseModalOpen}
+            />
         </Modal>
     );
 }
@@ -92,6 +83,11 @@ const styles = StyleSheet.create({
       padding: 20,
       paddingTop: 50,
       backgroundColor: '#3B3936',
+    },
+    workoutHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     buttonGroup: {
         marginVertical: 20,

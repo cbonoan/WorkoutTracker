@@ -3,15 +3,46 @@ import NewWorkout from "@/components/NewWorkout";
 import Seperator from "@/components/Seperator";
 import { Text } from "@/components/Text";
 import WorkoutHistory from "@/components/WorkoutHistory";
-import { useState } from "react";
+import { TExerciseDataset } from "@/types/TExercise";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+
+const exerciseDb: TExerciseDataset[] = [
+  {
+    name: 'Barbell Bench',
+    id: '1',
+  },
+  {
+    name: 'Barbell Back Squat',
+    id: '2',
+  },
+  {
+    name: 'Lat Pulldown',
+    id: '3',
+  },
+  {
+    name: 'Dumbbell Curls',
+    id: '4',
+  },
+  {
+    name: 'Dumbbell Overhead Shoulder Press',
+    id: '5',
+  },
+]
 
 export default function Index() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [exerciseDataset, setExerciseDataset] = useState<TExerciseDataset[]>([]);
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
   }
+
+  useEffect(() => {
+    // axios.get('/get-exercise-dataset')
+    //   .then((data) => setExerciseDataset(data));
+    setExerciseDataset(exerciseDb);
+  }, []);
 
   return (
     <View style={styles.view}>
@@ -24,6 +55,7 @@ export default function Index() {
       <NewWorkout 
         isModalVisible={isModalVisible}
         handleCloseModal={handleCloseModal}
+        exerciseDataset={exerciseDataset}
       />
 
       <WorkoutHistory />

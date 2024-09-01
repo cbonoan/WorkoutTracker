@@ -1,5 +1,6 @@
 import { Exercise as ExerciseModel } from "@/models/Exercise";
 import { TExercise } from "@/types/TExercise";
+import { TSet } from "@/types/TSet";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
@@ -9,8 +10,10 @@ import Set from "./Set";
 import { Text } from "./Text";
 import TextInput from "./TextInput";
 
-type TExerciseProps = TExercise & {
-    exercise: ExerciseModel
+interface IExercise extends TExercise {
+    exercise: ExerciseModel,
+    name: string,
+    sets: TSet[],
     handleRemoveExercise: (exerciseId: string) => void;
 }
 
@@ -19,7 +22,7 @@ const Exercise = ({
     name,
     sets,
     handleRemoveExercise,
-}: TExerciseProps) => {
+}: IExercise) => {
     const [currentSets, setCurrentSets] = useState(sets);
 
     const handleAddSet = () => {
