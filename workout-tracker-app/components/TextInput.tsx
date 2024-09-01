@@ -1,6 +1,6 @@
 import { TextInput as _TextInput, StyleSheet, TextInputProps } from "react-native";
 
-type TTextInput = TextInputProps & {
+type TTextInput = Omit<TextInputProps, 'style'> & {
     type?: 'default' | 'title' | 'subtitle';
     styles?: {}
 }

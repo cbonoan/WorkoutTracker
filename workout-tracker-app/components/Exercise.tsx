@@ -50,7 +50,17 @@ const Exercise = ({
     return (
         <View style={exerciseStyles.view}>
             <View style={exerciseStyles.exerciseHeader}>
-                <TextInput type="subtitle">{name}</TextInput>
+                <TextInput 
+                    styles={{ 
+                        maxWidth: '60%',
+                        backgroundColor: '#878787',
+                        borderRadius: 5,
+                        padding: 5,
+                    }} 
+                    type="subtitle"
+                >
+                    {name}
+                </TextInput>
                 <Pressable onPress={() => handleRemoveExercise(exercise.getId())}>
                     <Ionicons name="remove-circle" size={24} color="#BD2A2E" />
                 </Pressable>

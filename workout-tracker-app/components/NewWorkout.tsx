@@ -1,3 +1,4 @@
+import { useModal } from "@/hooks/useModal";
 import { useNewWorkout } from "@/hooks/useNewWorkout";
 import { TExerciseDataset } from "@/types/TExercise";
 import { FlatList, Modal, StyleSheet, View } from "react-native";
@@ -21,14 +22,18 @@ const NewWorkout = ({
 }: INewWorkout) => {
     const {
         exercises,
-        isAddExerciseModalOpen,
         workoutName,
         handleChangeWorkoutName,
-        handleOpenAddExerciseModal,
         handleAddExercise,
         handleRemoveExercise,
         handleCancelWorkout,
-    } = useNewWorkout(handleCloseModal);
+    } = useNewWorkout();
+
+    const {
+        isOpen: isAddExerciseModalOpen,
+        handleOpenModal: handleOpenAddExerciseModal,
+        handleCloseModal: handleCloseAddExerciseModal,
+    } = useModal();
 
     return (
         <Modal
@@ -65,13 +70,18 @@ const NewWorkout = ({
                 <View style={styles.buttonGroup}>
                     <Button title="Add exercise" onPress={handleOpenAddExerciseModal}/>
                     <Seperator />
-                    <Button color={'#BD2A2E'} title="Cancel workout" onPress={handleCancelWorkout}/>
+                    <Button color={'#BD2A2E'} title="Cancel workout" onPress={() => {
+                        handleCancelWorkout();
+                        handleCloseModal();
+                    }}/>
                 </View>
             </View>
 
             <AddExercise 
                 exerciseDataset={exerciseDataset}
                 isOpen={isAddExerciseModalOpen}
+                handleAddExercise={handleAddExercise}
+                handleCloseModal={handleCloseAddExerciseModal}
             />
         </Modal>
     );

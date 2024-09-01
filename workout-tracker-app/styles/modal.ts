@@ -6,5 +6,5 @@ export const modalStyles = StyleSheet.create({
         padding: 20,
         paddingTop: 50,
         backgroundColor: '#3B3936',
-    }
+    },
 });

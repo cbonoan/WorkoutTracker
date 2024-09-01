@@ -9,16 +9,12 @@ import { StyleSheet, View } from "react-native";
 
 const exerciseDb: TExerciseDataset[] = [
   {
-    name: 'Barbell Bench',
-    id: '1',
-  },
-  {
     name: 'Barbell Back Squat',
     id: '2',
   },
   {
-    name: 'Lat Pulldown',
-    id: '3',
+    name: 'Barbell Bench',
+    id: '1',
   },
   {
     name: 'Dumbbell Curls',
@@ -27,6 +23,10 @@ const exerciseDb: TExerciseDataset[] = [
   {
     name: 'Dumbbell Overhead Shoulder Press',
     id: '5',
+  },
+  {
+    name: 'Lat Pulldown',
+    id: '3',
   },
 ]
 

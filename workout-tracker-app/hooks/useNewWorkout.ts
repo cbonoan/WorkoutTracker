@@ -1,25 +1,18 @@
 import { Exercise } from "@/models/Exercise";
 import { useState } from "react";
 
-export const useNewWorkout = (
-    handleCloseModal: () => void,
-) => {
+export const useNewWorkout = () => {
     const [exercises, setExercises] = useState<Exercise[]>([]);
-    const [isAddExerciseModalOpen, setIsAddExerciseModalOpen] = useState(false);
     const [workoutName, setWorkoutName] = useState('New Workout');
 
     const handleChangeWorkoutName = (name: string) => {
         setWorkoutName(name);
     }
 
-    const handleOpenAddExerciseModal = () => {
-        setIsAddExerciseModalOpen(true);
-    }
-
-    const handleAddExercise = () => {
+    const handleAddExercise = (name: string, id: string) => {
         setExercises(prev => [
             ...prev,
-            new Exercise()
+            new Exercise(name, id)
         ]);
     }
 
@@ -42,15 +35,12 @@ export const useNewWorkout = (
     const handleCancelWorkout = () => {
         setWorkoutName('New Workout');
         setExercises([]);
-        handleCloseModal();
     }
 
     return {
         exercises,
-        isAddExerciseModalOpen,
         workoutName,
         handleChangeWorkoutName,
-        handleOpenAddExerciseModal,
         handleAddExercise,
         handleRemoveExercise,
         handleCancelWorkout,
