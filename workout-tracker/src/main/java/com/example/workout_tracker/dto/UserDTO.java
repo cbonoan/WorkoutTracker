@@ -1,23 +1,29 @@
 package com.example.workout_tracker.dto;
 
+import java.util.ArrayList;
+
+import com.example.workout_tracker.model.Workout;
+
 public class UserDTO {
     private Long id;
     private String name;
     private String email;
+    private String password;
+    private ArrayList<Workout> workouts;
 
-    // Constructors
-    public UserDTO() {
-    }
+    public UserDTO() {}
 
-    public UserDTO(Long id, String name, String email) {
+    public UserDTO(Long id, String name, String email, 
+    String password, ArrayList<Workout> workouts) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.password = password;
+        this.workouts = workouts;
     }
 
-    // Getters and Setters
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -25,7 +31,7 @@ public class UserDTO {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -33,10 +39,26 @@ public class UserDTO {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ArrayList<Workout> getWorkouts() {
+        return this.workouts;
+    }
+
+    public void setWorkouts(ArrayList<Workout> workouts) {
+        this.workouts = workouts;
     }
 }
