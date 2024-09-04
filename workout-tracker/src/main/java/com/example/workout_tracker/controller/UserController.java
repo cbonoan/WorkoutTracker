@@ -1,6 +1,8 @@
 package com.example.workout_tracker.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -8,6 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     // @Autowired
     // private UserService userService;
+
+    @GetMapping
+    public @ResponseBody String greeting() {
+		return "Hello, World";
+	}
 
     // @PostMapping
     // public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {

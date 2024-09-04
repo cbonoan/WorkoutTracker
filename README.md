@@ -14,6 +14,8 @@ I have a deep passion for the gym, and I've been wanting to learn react-native, 
 
 - August 31, 2024: Within the workout modal, I completed the feature that allows the user to add exercises and sets to the exercises as well as removing the exercises and sets if the user wishes. 
 
+- September 3, 2024: In the process of creating a database for the application. Since I'm familiar with Hibernate, I decided to use that as well as MySQL to manage the database. I created the models based off the simple diagram I created as well as the corresponding DTOs and Repositories.
+
 ## Current Feautres
 
 - Can start an empty workout.
