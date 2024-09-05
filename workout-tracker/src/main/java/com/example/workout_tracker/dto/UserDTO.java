@@ -1,6 +1,6 @@
 package com.example.workout_tracker.dto;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.example.workout_tracker.model.Workout;
 
@@ -9,12 +9,12 @@ public class UserDTO {
     private String name;
     private String email;
     private String password;
-    private ArrayList<Workout> workouts;
+    private List<Workout> workouts;
 
     public UserDTO() {}
 
     public UserDTO(Long id, String name, String email, 
-    String password, ArrayList<Workout> workouts) {
+    String password, List<Workout> workouts) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,11 +54,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public ArrayList<Workout> getWorkouts() {
+    public List<Workout> getWorkouts() {
         return this.workouts;
     }
 
-    public void setWorkouts(ArrayList<Workout> workouts) {
+    public void setWorkouts(List<Workout> workouts) {
         this.workouts = workouts;
     }
 }

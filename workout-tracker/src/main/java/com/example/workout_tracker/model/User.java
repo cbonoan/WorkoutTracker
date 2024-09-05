@@ -1,6 +1,7 @@
 package com.example.workout_tracker.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,23 +22,23 @@ public class User {
     @Column(nullable = false)
     private String name;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private ArrayList<Workout> workouts;
+    private List<Workout> workouts;
 
     public User() {}
 
     public User(String name, String email, 
-    String password, ArrayList<Workout> workouts) {
+    String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.workouts = workouts;
+        this.workouts = new ArrayList<Workout>();
     }
 
     public Long getId() {
@@ -72,11 +73,11 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Workout> getWorkouts() {
+    public List<Workout> getWorkouts() {
         return this.workouts;
     }
 
-    public void setWorkouts(ArrayList<Workout> workouts) {
+    public void setWorkouts(List<Workout> workouts) {
         this.workouts = workouts;
     }
 }

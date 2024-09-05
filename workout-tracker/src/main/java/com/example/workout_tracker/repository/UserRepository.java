@@ -7,5 +7,6 @@ import com.example.workout_tracker.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    
+    public User findUserByEmail(String email);
+    public User findByEmailAndPassword(String email, String password);
 }

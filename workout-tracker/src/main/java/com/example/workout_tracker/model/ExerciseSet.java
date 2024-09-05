@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "exercise_set")
 public class ExerciseSet {
     @Id
-    @Column(name = "exercise_id")
+    @Column(name = "exercise_set_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
