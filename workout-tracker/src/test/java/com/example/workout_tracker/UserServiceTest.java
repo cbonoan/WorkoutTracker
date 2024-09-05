@@ -83,7 +83,6 @@ public class UserServiceTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Test
@@ -93,7 +92,7 @@ public class UserServiceTest {
 
         when(userRepository.findByEmailAndPassword(email, password)).thenReturn(null);
 
-        assertThrows(Exception.class, ( ) -> {
+        assertThrows(Exception.class, () -> {
             userService.getUserByEmailAndPassword(email, password);
         });
     }

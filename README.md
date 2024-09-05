@@ -16,6 +16,8 @@ I have a deep passion for the gym, and I've been wanting to learn react-native, 
 
 - September 3, 2024: In the process of creating a database for the application. Since I'm familiar with Hibernate, I decided to use that as well as MySQL to manage the database. I created the models based off the simple diagram I created as well as the corresponding DTOs and Repositories.
 
+- September 4, 2024: Spent a good chunk of time learning JUnit and Mockito. Was able to create some tests for UserService, and I see how valuable tests are because whenever I made changes to the models or service, the tests helped me make sure the intended outcome was still happening. Next I'm going to create a login/signup system.
+
 ## Current Feautres
 
 - Can start an empty workout.

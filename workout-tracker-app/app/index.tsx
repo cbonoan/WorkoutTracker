@@ -90,7 +90,7 @@ const exerciseDb: TExerciseDataset[] = [
     }
 ]
 
-export default function Index() {
+const Index = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [exerciseDataset, setExerciseDataset] = useState<TExerciseDataset[]>([]);
 
@@ -131,3 +131,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#3B3936',
   }
 })
+
+export default Index;
