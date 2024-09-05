@@ -1,9 +1,10 @@
-import { Stack } from "expo-router";
+import { SessionProvider } from "@/ctx";
+import { Slot } from "expo-router";
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }}/>
-    </Stack>
+    <SessionProvider>
+      <Slot />
+    </SessionProvider>
   );
 }

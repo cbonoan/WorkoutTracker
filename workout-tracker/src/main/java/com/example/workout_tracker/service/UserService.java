@@ -28,15 +28,14 @@ public class UserService {
         savedUser.getPassword(), savedUser.getWorkouts());
     }
 
-    public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream()
-        .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail(), 
-            user.getPassword(), user.getWorkouts()))
-        .collect(Collectors.toList());
-    }
-
     public UserDTO getUserByEmailAndPassword(String email, String password) throws Exception {
-        User user =  userRepository.findByEmailAndPassword(email, password);
+        User user = userRepository.findUserByEmail(email);
+
+        if (user == null) {
+            throw new Exception("Email not found");
+        }
+
+        user =  userRepository.findByEmailAndPassword(email, password);
 
         if (user == null) {
             throw new Exception("Incorrect email or password");
@@ -44,5 +43,13 @@ public class UserService {
 
         return new UserDTO(user.getId(), user.getName(), user.getEmail(),
         user.getPassword(), user.getWorkouts());
-    } 
+    }
+     
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream()
+        .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail(), 
+            user.getPassword(), user.getWorkouts()))
+        .collect(Collectors.toList());
+    }
+
 }
