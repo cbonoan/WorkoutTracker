@@ -35,7 +35,7 @@ public class UserController {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-
+        
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 

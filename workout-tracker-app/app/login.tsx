@@ -1,20 +1,47 @@
+import Pressable from "@/components/Pressable";
 import { Text } from "@/components/Text";
+import TextInput from "@/components/TextInput";
 import { useSession } from "@/ctx";
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 const Login = () => {
     const { signIn } = useSession();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleChangeEmail = (email: string) => {
+        setEmail(email);
+    }
+
+    const handleChangePassword = (password: string) => {
+        setPassword(password);
+    }
 
     return (
         <View style={styles.view}>
-            <Text
+            <View style={styles.textInputView}>
+                <TextInput  
+                    onChangeText={text => handleChangeEmail(text)} 
+                    styles={styles.textInput} 
+                    type="subtitle" 
+                    placeholder="Email"
+                />
+                <TextInput 
+                    onChangeText={text => handleChangePassword(text)} 
+                    styles={styles.textInput} 
+                    secureTextEntry 
+                    type="subtitle" 
+                    placeholder="Password"
+                />
+            </View>
+            <Pressable 
                 onPress={() => {
-                    console.log("Signing in");
-                    signIn();
+                    signIn(email, password);
                 }}
             >
-                Sign In
-            </Text>
+                <Text type="subtitle">Login</Text>
+            </Pressable>
         </View>
     );
 }
@@ -28,6 +55,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#3B3936',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    textInputView:  {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginBottom: 20,
+    },
+    textInput: {
+        color: 'black',
+        textDecorationLine: 'none',
+        marginBottom: 20,
+        borderRadius: 10,
+        backgroundColor: 'white',
+        padding: 10,
     }
 })
 

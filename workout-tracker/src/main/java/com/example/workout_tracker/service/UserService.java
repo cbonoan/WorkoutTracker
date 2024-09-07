@@ -38,7 +38,7 @@ public class UserService {
         user =  userRepository.findByEmailAndPassword(email, password);
 
         if (user == null) {
-            throw new Exception("Incorrect email or password");
+            throw new Exception("Incorrect password");
         } 
 
         return new UserDTO(user.getId(), user.getName(), user.getEmail(),

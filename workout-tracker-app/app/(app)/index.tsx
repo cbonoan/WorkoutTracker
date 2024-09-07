@@ -3,6 +3,7 @@ import NewWorkout from "@/components/NewWorkout";
 import Seperator from "@/components/Seperator";
 import { Text } from "@/components/Text";
 import WorkoutHistory from "@/components/WorkoutHistory";
+import { useSession } from "@/ctx";
 import { TExerciseDataset } from "@/types/TExercise";
 import { useEffect, useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
@@ -91,36 +92,37 @@ const exerciseDb: TExerciseDataset[] = [
 ]
 
 const Index = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [exerciseDataset, setExerciseDataset] = useState<TExerciseDataset[]>([]);
+    const { user } = useSession();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [exerciseDataset, setExerciseDataset] = useState<TExerciseDataset[]>([]);
+    
+    const handleCloseModal = () => {
+        setIsModalVisible(false);
+    }
 
-  const handleCloseModal = () => {
-    setIsModalVisible(false);
-  }
+    useEffect(() => {
+        // axios.get('/get-exercise-dataset')
+        //   .then((data) => setExerciseDataset(data));
+        setExerciseDataset(exerciseDb);
+    }, []);
 
-  useEffect(() => {
-    // axios.get('/get-exercise-dataset')
-    //   .then((data) => setExerciseDataset(data));
-    setExerciseDataset(exerciseDb);
-  }, []);
+    return (
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} enabled={false} style={styles.view}>
+        <Text type="title">Workout Tracker</Text>
+        <Seperator />
+        <Button 
+            title="Start a new workout"
+            onPress={() => setIsModalVisible(true)}
+        />
+        <NewWorkout 
+            isModalVisible={isModalVisible}
+            handleCloseModal={handleCloseModal}
+            exerciseDataset={exerciseDataset}
+        />
 
-  return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} enabled={false} style={styles.view}>
-      <Text type="title">Workout Tracker</Text>
-      <Seperator />
-      <Button 
-        title="Start a new workout"
-        onPress={() => setIsModalVisible(true)}
-      />
-      <NewWorkout 
-        isModalVisible={isModalVisible}
-        handleCloseModal={handleCloseModal}
-        exerciseDataset={exerciseDataset}
-      />
-
-      <WorkoutHistory />
-    </KeyboardAvoidingView>
-  );
+        <WorkoutHistory />
+        </KeyboardAvoidingView>
+    );
 }
 
 const styles = StyleSheet.create({
