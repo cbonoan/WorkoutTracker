@@ -108,7 +108,7 @@ const Index = () => {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} enabled={false} style={styles.view}>
-        <Text type="title">Workout Tracker</Text>
+        <Text type="title">Ready to work, {user?.name.split(' ')[0]}?</Text>
         <Seperator />
         <Button 
             title="Start a new workout"

@@ -10,12 +10,14 @@ const AuthContext = createContext<{
     session?: string | null;
     user: TUser | null;
     isLoading: boolean;
+    errorMsg: string;
 }>({
     signIn: (email: string, password: string) => null,
     signOut: () => null,
     session: null,
     user: null,
     isLoading: false,
+    errorMsg: '',
 });
 
 const handleSignIn = async (email: string, password: string) => {
@@ -27,8 +29,8 @@ const handleSignIn = async (email: string, password: string) => {
         const user = res.data;
 
         return user;
-    } catch (error) {
-        console.error('Error: ', error);
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -50,16 +52,19 @@ export const useSession = () => {
 export const SessionProvider = ({ children }: PropsWithChildren) => {
     const [[isLoading, session], setSession] = useStorageState('session');
     const [user, setUser] = useState<TUser | null>(null);
+    const [errorMsg, setErrorMsg] = useState('');
 
     return (
         <AuthContext.Provider
             value={{
                 signIn: async (email: string, password: string) => {
-                    const user = await handleSignIn(email, password);
-                    if (!user) return;
-
-                    setUser(user);
-                    router.replace('/')
+                    const response = await handleSignIn(email, password);
+                    if (typeof response === 'string') {
+                        setErrorMsg(response);
+                    } else {
+                        setUser(response);
+                        router.replace('/')
+                    }
                 },
                 signOut: () => {
                     // setSession(null);
@@ -67,6 +72,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
                 session,
                 user,
                 isLoading,
+                errorMsg
             }}
         >
             {children}

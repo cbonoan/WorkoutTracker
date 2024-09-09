@@ -12,7 +12,7 @@ const Pressable = ({
                 width: '100%',
                 borderRadius: 10,
                 padding: 15,
-                backgroundColor: '#486966'
+                backgroundColor: '#486966',
             }}
         >
             <_Pressable

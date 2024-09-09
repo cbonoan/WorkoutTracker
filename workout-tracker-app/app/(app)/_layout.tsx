@@ -1,13 +1,8 @@
-import { Text } from '@/components/Text';
 import { Redirect, Stack } from 'expo-router';
 import { useSession } from '../../ctx';
 
 export default function AppLayout() {
-  const { session, user, isLoading } = useSession();
-
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
+  const { session, user } = useSession();
 
   if (!user) {
     return <Redirect href="/login" />;

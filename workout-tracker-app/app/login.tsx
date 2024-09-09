@@ -6,7 +6,7 @@ import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 const Login = () => {
-    const { signIn } = useSession();
+    const { signIn, isLoading, errorMsg } = useSession();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -36,12 +36,23 @@ const Login = () => {
                 />
             </View>
             <Pressable 
+                disabled={isLoading}
                 onPress={() => {
                     signIn(email, password);
                 }}
             >
                 <Text type="subtitle">Login</Text>
             </Pressable>
+            {!!errorMsg && (
+                <View style={{ marginTop: 20 }}>
+                    <Text 
+                        type="defaultSemiBold" 
+                        style={{ color: 'red' }}
+                    >
+                        {errorMsg}
+                    </Text>
+                </View>
+            )}
         </View>
     );
 }
