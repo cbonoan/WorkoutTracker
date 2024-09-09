@@ -31,6 +31,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Workout> workouts;
 
+    @OneToMany(mappedBy = "user")
+    private List<Exercise> exercises;
+
     public User() {}
 
     public User(String name, String email, 
@@ -39,6 +42,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.workouts = new ArrayList<Workout>();
+        this.exercises = new ArrayList<Exercise>();
     }
 
     public Long getId() {
@@ -79,5 +83,13 @@ public class User {
 
     public void setWorkouts(List<Workout> workouts) {
         this.workouts = workouts;
+    }
+
+    public List<Exercise> getExercises() {
+        return this.exercises;
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
     }
 }

@@ -2,7 +2,9 @@ package com.example.workout_tracker.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -32,11 +35,15 @@ public class Workout {
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "workout_exercises",
+    @JoinTable(
+        name = "workout_exercise",
         joinColumns = @JoinColumn(name = "workout_id"),
-        inverseJoinColumns = @JoinColumn(name = "workout_exercise_id")
+        inverseJoinColumns = @JoinColumn(name = "exercise_id")
     )
-    private ArrayList<WorkoutExercise> workoutExercises; 
+    private List<Exercise> exercises = new ArrayList<>();
+
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL)
+    private List<ExerciseSet> sets = new ArrayList<>();
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false, name = "completed_at")
@@ -44,10 +51,9 @@ public class Workout {
 
     public Workout() {}
 
-    public Workout(User user, String name, ArrayList<WorkoutExercise> workoutExercises) {
+    public Workout(User user, String name) {
         this.user = user;
         this.name = name;
-        this.workoutExercises = workoutExercises;
     }
 
     public Long getId() {
@@ -74,11 +80,19 @@ public class Workout {
         this.name = name;
     }
 
-    public ArrayList<WorkoutExercise> getWorkoutExercises() {
-        return this.workoutExercises;
+    public List<Exercise> getExercises() {
+        return this.exercises;
     }
 
-    public void setWorkoutExercises(ArrayList<WorkoutExercise> workoutExercises) {
-        this.workoutExercises = workoutExercises;
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
+    public List<ExerciseSet> getExerciseSets() {
+        return this.sets;
+    }
+
+    public void setExerciseSets(List<ExerciseSet> exerciseSets) {
+        this.sets = exerciseSets;
     }
 }

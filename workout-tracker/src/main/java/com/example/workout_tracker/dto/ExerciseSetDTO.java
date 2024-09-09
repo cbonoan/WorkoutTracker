@@ -1,20 +1,20 @@
 package com.example.workout_tracker.dto;
 
-import com.example.workout_tracker.model.WorkoutExercise;
+import com.example.workout_tracker.model.Exercise;
 
 public class ExerciseSetDTO {
     private Long id;
-    private WorkoutExercise workoutExercise;
+    private Exercise exercise;
     private Integer setNumber;
     private Integer weight;
     private Integer reps;
 
     public ExerciseSetDTO() {}
 
-    public ExerciseSetDTO(Long id, WorkoutExercise workoutExercise, 
+    public ExerciseSetDTO(Long id, Exercise exercise, 
     Integer setNumber, Integer weight, Integer reps) {
         this.id = id;
-        this.workoutExercise = workoutExercise;
+        this.exercise = exercise;
         this.setNumber = setNumber;
         this.weight = weight;
         this.reps = reps;
@@ -28,12 +28,12 @@ public class ExerciseSetDTO {
         this.id = id;
     } 
 
-    public WorkoutExercise getWorkoutExerciseId() {
-        return this.workoutExercise;
+    public Exercise getExercise() {
+        return this.exercise;
     }
 
-    public void setWorkoutExerciseId(WorkoutExercise workoutExercise) {
-        this.workoutExercise = workoutExercise;
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 
     public Integer getSetNumber() {
