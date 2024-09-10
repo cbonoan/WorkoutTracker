@@ -31,20 +31,20 @@ public class Exercise {
     @ManyToMany(mappedBy = "exercises")
     private List<Workout> workouts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "exericse")
+    @OneToMany(mappedBy = "exercise")
     private List<ExerciseSet> sets = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Exercise() {}
 
     public Exercise (User user, String name, 
     String bodyPart) {
+        this.user = user;
         this.name = name;
         this.bodyPart = bodyPart;
-        this.user = user;
     }
 
     public Long getId() {

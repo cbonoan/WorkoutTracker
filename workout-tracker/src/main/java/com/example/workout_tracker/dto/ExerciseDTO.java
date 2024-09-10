@@ -1,5 +1,7 @@
 package com.example.workout_tracker.dto;
 
+import com.example.workout_tracker.model.Exercise;
+
 public class ExerciseDTO {
     private Long id;
     private String name;
@@ -11,6 +13,12 @@ public class ExerciseDTO {
         this.id = id;
         this.name = name;
         this.bodyPart = bodyPart;
+    }
+
+    public ExerciseDTO(Exercise exercise) {
+        this.id = exercise.getId();
+        this.name = exercise.getName();
+        this.bodyPart = exercise.getBodypart();
     }
 
     public Long getId() {

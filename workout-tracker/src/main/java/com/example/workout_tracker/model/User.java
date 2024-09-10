@@ -3,6 +3,7 @@ package com.example.workout_tracker.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Workout> workouts;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Exercise> exercises;
 
     public User() {}
